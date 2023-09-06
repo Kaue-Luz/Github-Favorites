@@ -9,12 +9,43 @@
     <div id="app">
         <header>
             <h1>Github Favorites</h1>
-            <div>
+            <div class="search">
                 <label for="input-search">Usúario do Github</label>
                 <input id="input-search" type="text" placeholder="Usúario do Github">
+                <button>&plus;</button>
             </div>
         </header>
-        <table></table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Usúario</th>
+                    <th>Repositórios</th>
+                    <th>Seguidores</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="user">
+                        <img src="https://github.com/kaue-luz.png" alt="Imagem de kaue Luz">
+                        <a href="https://github.com/kaue-luz" target="_blank">
+                            <p>Kaue Luz</p>
+                            <span>kaue-luz</span>
+                        </a>
+                    </td>
+                    <td class="repositories">
+                        12
+                    </td>
+                    <td class="followers">
+                        2320
+                    </td>
+                    <td>
+                        <button>&times;</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
