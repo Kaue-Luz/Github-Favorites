@@ -23,6 +23,13 @@ export class Favorites {
             }
         ]
     }
+
+    delete(user) {
+        //se for diferente mantem
+        const filteredEntries = this.entries.filter(entry => entry.login !== user.login)
+
+        console.log(filteredEntries)
+    }
 }
 
 // classe que vai criar a visualização e eventos do HTML
@@ -48,6 +55,13 @@ export class FavoritesView extends Favorites {
             row.querySelector('.user span').textContent = `${user.login}`
             row.querySelector('.repositories').textContent = user.public_repos
             row.querySelector('.followers').textContent = user.follower
+
+            row.querySelector('.remove').onclick = () => {
+                const isOk = confirm(`Deseja excluir o usúario ${user.name}!?`)
+                if(isOk) {
+                    this.delete(user)
+                }
+            }
 
             this.tbody.append(row)
         })
