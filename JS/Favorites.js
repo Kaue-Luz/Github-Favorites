@@ -7,28 +7,31 @@ export class Favorites {
     }
 
     load() {
+        this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
+        
         //array com um elemento
-        this.entries = [
-            {
-            login: 'kaue-luz',
-            name: 'Erik Kaue',
-            public_repos: '12',
-            follower: '12000'
-            },
-            {
-            login: 'FeBassetto',
-            name: 'Felipe Basseto',
-            public_repos: '15',
-            follower: '12060'
-            }
-        ]
+        //this.entries = [
+        //    {
+        //    login: 'kaue-luz',
+        //    name: 'Erik Kaue',
+        //    public_repos: '12',
+        //    follower: '12000'
+        //    },
+        //    {
+        //    login: 'FeBassetto',
+        //    name: 'Felipe Basseto',
+        //    public_repos: '15',
+        //    follower: '12060'
+        //    }
+        //]
     }
 
     delete(user) {
         //se for diferente mantem
         const filteredEntries = this.entries.filter(entry => entry.login !== user.login)
 
-        console.log(filteredEntries)
+        this.entries = filteredEntries
+        this.update()
     }
 }
 
