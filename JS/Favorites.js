@@ -7,7 +7,7 @@ export class GithubUser {
             login,
             name,
             public_repos,
-            followers
+            followers,
         }))
     }
 }
@@ -41,8 +41,24 @@ export class Favorites {
         //]
     }
 
+    save() {
+        localStorage.setItem('@github-favorites', JSON.stringify(this.entries))
+    }
+
     async add(username) {
-        const user = await GithubUser.search(username)
+        try {
+            const user = await GithubUser.search(username)
+
+            if(user.login === undefined) {
+                throw new Error('Usúario não encontrado!')
+            }
+
+            this.entries = [user, ...this.entries]
+            this.update()
+            this.save()
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
     delete(user) {
@@ -51,6 +67,7 @@ export class Favorites {
 
         this.entries = filteredEntries
         this.update()
+        this.save()
     }
 }
 
@@ -86,7 +103,7 @@ export class FavoritesView extends Favorites {
             row.querySelector('.user p').textContent = `${user.name}`
             row.querySelector('.user span').textContent = `${user.login}`
             row.querySelector('.repositories').textContent = user.public_repos
-            row.querySelector('.followers').textContent = user.follower
+            row.querySelector('.followers').textContent = user.followers
 
             row.querySelector('.remove').onclick = () => {
                 const isOk = confirm(`Deseja excluir o usúario ${user.name}!?`)
